@@ -81,7 +81,7 @@ GEM
       ffi (~> 1.0)
     rbs (3.9.5)
       logger
-    rdoc (6.16.0)
+    rdoc (6.17.0)
       erb
       psych (>= 4.0.0)
       tsort
@@ -139,7 +139,7 @@ GEM
       strscan (>= 1.0.0)
       terminal-table (>= 2, < 5)
       uri (>= 0.12.0)
-    stringio (3.1.8)
+    stringio (3.1.9)
     strscan (3.1.5)
     terminal-table (4.0.0)
       unicode-display_width (>= 1.1.1, < 4)
@@ -176,7 +176,7 @@ DEPENDENCIES
   logger (~> 1.7)
   pry (~> 0.15.2)
   rake (~> 13.0)
-  rdoc (~> 6.16)
+  rdoc (~> 6.17)
   rspec (~> 3.0)
   rubocop (~> 1.21)
   simplecov (~> 0.22)
