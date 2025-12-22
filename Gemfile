@@ -23,4 +23,4 @@ group :development do
   gem 'steep', '~> 1.10'
 end
 
-gem "rdoc", "~> 6.16"
+gem "rdoc", "~> 7.0"
