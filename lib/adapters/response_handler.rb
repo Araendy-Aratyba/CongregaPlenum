@@ -24,7 +24,10 @@ module CongregaPlenum
 
     # Parses a JSON response body, raising {APIError} when invalid.
     def parse_json_response(response, url)
-      JSON.parse(response.body)
+      payload = JSON.parse(response.body)
+      return payload if payload.is_a?(Hash)
+
+      raise APIError, "Unexpected JSON payload from #{url}: expected an object"
     rescue JSON::ParserError => e
       raise APIError, "Invalid JSON response from #{url}: #{e.message}"
     end

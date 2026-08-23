@@ -32,7 +32,10 @@ module CongregaPlenum
     # Builds the configured Net::HTTP client honoring SSL and timeouts. Keeping
     # this logic here avoids repetition if a different adapter is introduced.
     def build_http_client(uri)
-      Net::HTTP.new(uri.host, uri.port).tap do |http|
+      host = uri.host
+      raise URI::InvalidURIError, 'HTTP URL must include a host' unless host
+
+      Net::HTTP.new(host, uri.port).tap do |http|
         http.use_ssl = uri.scheme == 'https'
         timeout = configuration.timeout
         http.read_timeout = timeout

@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe CongregaPlenum::ResponseHandler do
   subject(:handler) { described_class.new }
 
@@ -29,5 +30,16 @@ RSpec.describe CongregaPlenum::ResponseHandler do
         expect { handler.handle(response, 'url') }.to raise_error(CongregaPlenum::APIError)
       end
     end
+
+    context 'quando o JSON de topo não é um objeto' do
+      let(:code) { '200' }
+      let(:body) { [{ id: 1 }].to_json }
+
+      it 'lança CongregaPlenum::APIError' do
+        expect { handler.handle(response, 'url') }
+          .to raise_error(CongregaPlenum::APIError, /expected an object/)
+      end
+    end
   end
 end
+# rubocop:enable Metrics/BlockLength

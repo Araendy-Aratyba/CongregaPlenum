@@ -51,12 +51,13 @@ module CongregaPlenum
       # Fetches a single legislature payload.
       #
       # @param legislature_id [Integer]
-      # @return [Hash,nil]
+      # @return [Hash, nil]
+      # @raise [CongregaPlenum::APIError] if +dados+ has an unexpected type
       def fetch_by_id(legislature_id)
         log_debug("Buscando legislatura #{legislature_id}")
 
         response = api_get("legislaturas/#{legislature_id}")
-        response['dados']
+        extract_detail(response, "legislatura #{legislature_id}")
       end
 
       # Retrieves the mesa composition for the provided legislature ID.
@@ -86,6 +87,13 @@ module CongregaPlenum
       end
 
       private
+
+      def extract_detail(response, resource)
+        detail = response['dados']
+        return detail if detail.nil? || detail.is_a?(Hash)
+
+        raise APIError, "Resposta inválida para #{resource}: esperado Hash ou nil em dados"
+      end
 
       def logger
         CongregaPlenum.configuration.logger

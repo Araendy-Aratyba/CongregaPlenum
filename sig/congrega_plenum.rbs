@@ -3,6 +3,7 @@ module CongregaPlenum
   type params_hash = ::Hash[::Symbol, untyped]
   type payload_hash = ::Hash[String, untyped]
   type payload_list = ::Array[payload_hash]
+  type detail_payload = payload_hash?
 
   class Error < ::StandardError
   end
@@ -56,8 +57,8 @@ module CongregaPlenum
   end
 
   class ResponseHandler
-    def handle: (::Net::HTTPResponse, String) -> untyped
-    def parse_json_response: (::Net::HTTPResponse, String) -> untyped
+    def handle: (::Net::HTTPResponse, String) -> payload_hash
+    def parse_json_response: (::Net::HTTPResponse, String) -> payload_hash
   end
 
   class Client
@@ -90,9 +91,10 @@ module CongregaPlenum
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
     def self.fetch_all_by_legislature: (Integer) -> payload_list
-    def self.fetch_by_id: (Integer) -> payload_hash?
+    def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_list: (?page: Integer, ?items_per_page: Integer, ?legislature_id: Integer?) -> payload_list
     def self.fetch_deputies_collection: (context: String, params: params_hash) -> payload_list
+    def self.extract_detail: (payload_hash, String) -> detail_payload
     def self.build_detailed_deputies: (payload_list, String) -> payload_list
     def self.log_progress: (Integer, Integer, String) -> void
     def self.logger: () -> Logger
@@ -110,8 +112,9 @@ module CongregaPlenum
     def self.api_get: (String, ?params_hash) -> payload_hash
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
-    def self.fetch_by_id: (Integer) -> payload_hash?
+    def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_list: (?page: Integer, ?items_per_page: Integer) -> payload_list
+    def self.extract_detail: (payload_hash, String) -> detail_payload
     def self.build_detailed_parties: (payload_list) -> payload_list
     def self.log_progress: (Integer, Integer) -> void
     def self.logger: () -> Logger
@@ -129,34 +132,13 @@ module CongregaPlenum
     def self.api_get: (String, ?params_hash) -> payload_hash
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
-    def self.fetch_by_id: (Integer) -> payload_hash?
+    def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_mesa: (Integer) -> payload_list
     def self.fetch_deputies: (Integer) -> payload_list
+    def self.extract_detail: (payload_hash, String) -> detail_payload
     def self.logger: () -> Logger
     def self.log_info: (String) -> void
     def self.log_error: (String) -> void
     def self.log_debug: (String) -> void
-  end
-
-  # Minimal stubs for Net::HTTP types used internally
-  module ::Net
-    class HTTPResponse
-      def code: () -> String
-      def message: () -> String
-      def body: () -> String
-    end
-
-    class HTTP
-      def self.new: (String?, Integer?) -> HTTP
-      def use_ssl=: (bool) -> bool
-      attr_accessor read_timeout: Numeric
-      attr_accessor open_timeout: Numeric
-      def request: (::Net::HTTP::Get) -> HTTPResponse
-    end
-
-    class HTTP::Get
-      def self.new: (::URI::Generic) -> HTTP::Get
-      def []=: (String, String) -> String
-    end
   end
 end

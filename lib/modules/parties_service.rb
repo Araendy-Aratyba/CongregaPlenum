@@ -55,12 +55,13 @@ module CongregaPlenum
       # Retrieves the detailed payload for a single party.
       #
       # @param party_id [Integer]
-      # @return [Hash,nil]
+      # @return [Hash, nil]
+      # @raise [CongregaPlenum::APIError] if +dados+ has an unexpected type
       def fetch_by_id(party_id)
         log_debug("Buscando partido #{party_id}")
 
         response = api_get("partidos/#{party_id}")
-        response['dados']
+        extract_detail(response, "partido #{party_id}")
       end
 
       # Returns a paginated list of parties, without triggering detail lookups.
@@ -76,6 +77,13 @@ module CongregaPlenum
       end
 
       private
+
+      def extract_detail(response, resource)
+        detail = response['dados']
+        return detail if detail.nil? || detail.is_a?(Hash)
+
+        raise APIError, "Resposta inválida para #{resource}: esperado Hash ou nil em dados"
+      end
 
       # Converts the lightweight list into the detailed payload expected by
       # consumers. Extracted to simplify instrumentation/tests.

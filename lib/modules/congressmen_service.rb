@@ -58,12 +58,13 @@ module CongregaPlenum
       # Retrieves the detailed payload of a single congressman.
       #
       # @param deputy_id [Integer]
-      # @return [Hash,nil]
+      # @return [Hash, nil]
+      # @raise [CongregaPlenum::APIError] if +dados+ has an unexpected type
       def fetch_by_id(deputy_id)
         log_debug("Buscando deputado #{deputy_id}")
 
         response = api_get("deputados/#{deputy_id}")
-        response['dados']
+        extract_detail(response, "deputado #{deputy_id}")
       end
 
       # Returns a paginated list of congressmen straight from the API, without
@@ -84,6 +85,13 @@ module CongregaPlenum
       end
 
       private
+
+      def extract_detail(response, resource)
+        detail = response['dados']
+        return detail if detail.nil? || detail.is_a?(Hash)
+
+        raise APIError, "Resposta inválida para #{resource}: esperado Hash ou nil em dados"
+      end
 
       # Coordinates pagination and detail fetches so the long running process can
       # log progress and reuse error handling in one place.

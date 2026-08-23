@@ -10,5 +10,9 @@ target :lib do
   check 'lib/modules/**/*.rb'
 
   library 'logger'
+  library 'json'
+  library 'net-http'
+  library 'socket'
   library 'singleton'
+  library 'uri'
 end

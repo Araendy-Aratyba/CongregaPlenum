@@ -37,6 +37,7 @@ module CongregaPlenum
     # @param params [Hash]
     # @return [Array<Hash>]
     def get_paginated(endpoint, params = {})
+      # @type var results: Array[Hash[String, untyped]]
       results = []
       each_response_page(endpoint, params) { |page_data| results.concat(page_data) }
 

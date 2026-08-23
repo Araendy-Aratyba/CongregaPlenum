@@ -61,6 +61,25 @@ RSpec.describe CongregaPlenum::CongressmenService do
   end
 
   describe '.fetch_by_id' do
+    it 'retorna um hash quando a API entrega um detalhe' do
+      detail = { 'id' => 5 }
+      expect(client_double).to receive(:get).and_return('dados' => detail)
+
+      expect(described_class.fetch_by_id(5)).to eq(detail)
+    end
+
+    it 'retorna nil quando a resposta válida não contém detalhe' do
+      expect(client_double).to receive(:get).and_return('dados' => nil)
+
+      expect(described_class.fetch_by_id(5)).to be_nil
+    end
+
+    it 'rejeita um array que contradiz o contrato de detalhe' do
+      expect(client_double).to receive(:get).and_return('dados' => [])
+
+      expect { described_class.fetch_by_id(5) }.to raise_error(CongregaPlenum::APIError, /esperado Hash ou nil/)
+    end
+
     it 'propaga a falha da API' do
       expect(client_double).to receive(:get).and_raise(CongregaPlenum::APIError, 'falha')
 
