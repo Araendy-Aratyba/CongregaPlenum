@@ -14,7 +14,7 @@ module CongregaPlenum
       when 429 then raise RateLimitError, "Rate limit exceeded for #{url}"
       when 404 then raise APIError, "Resource not found: #{url}"
       when 500..599
-        raise APIError, "Server error (#{response.code}) for #{url}: #{response.message}"
+        raise ServerError, "Server error (#{response.code}) for #{url}: #{response.message}"
       else
         raise APIError, "HTTP Error #{response.code} for #{url}: #{response.message}"
       end

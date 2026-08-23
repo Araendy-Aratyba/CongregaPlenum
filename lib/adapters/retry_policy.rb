@@ -7,7 +7,7 @@ module CongregaPlenum
       @configuration = configuration
     end
 
-    # Wraps a block with retry logic for network/API errors.
+    # Wraps a block with retry logic for transient network/API errors.
     #
     # @param url [String] identifier used for logging
     # @yieldreturn [Object] result of the successful request
@@ -15,7 +15,7 @@ module CongregaPlenum
       retries = 0
       begin
         yield
-      rescue ConnectionError, APIError => e
+      rescue ConnectionError, RateLimitError, ServerError => e
         retries += 1
         return handle_retry_failure(url, e) if retries > max_retries
 

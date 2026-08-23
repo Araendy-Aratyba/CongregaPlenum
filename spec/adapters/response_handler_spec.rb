@@ -23,6 +23,22 @@ RSpec.describe CongregaPlenum::ResponseHandler do
       end
     end
 
+    context 'quando API retorna erro de servidor' do
+      let(:code) { '503' }
+
+      it 'lança erro transitório específico' do
+        expect { handler.handle(response, 'url') }.to raise_error(CongregaPlenum::ServerError)
+      end
+    end
+
+    context 'quando API retorna erro de cliente' do
+      let(:code) { '404' }
+
+      it 'lança APIError não transitório' do
+        expect { handler.handle(response, 'url') }.to raise_error(CongregaPlenum::APIError)
+      end
+    end
+
     context 'quando JSON é inválido' do
       let(:body) { 'invalid' }
 

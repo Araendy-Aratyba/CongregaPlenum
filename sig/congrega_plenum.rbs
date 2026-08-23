@@ -14,6 +14,9 @@ module CongregaPlenum
   class APIError < Error
   end
 
+  class ServerError < APIError
+  end
+
   class RateLimitError < Error
   end
 

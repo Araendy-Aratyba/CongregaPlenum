@@ -15,6 +15,8 @@ module CongregaPlenum
   class ConnectionError < Error; end
   # Raised when the API responds with an unexpected status code or payload.
   class APIError < Error; end
+  # Raised for transient 5xx responses that are safe to retry.
+  class ServerError < APIError; end
   # Raised when the API signals that the rate limit has been exceeded.
   class RateLimitError < Error; end
 
