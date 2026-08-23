@@ -46,18 +46,13 @@ RSpec.describe 'Release workflow' do
   end
 
   it 'autentica no RubyGems com o secret protegido do ambiente de release' do
-    credentials = step_named('Configure RubyGems credentials')
     push = step_named('Push to RubyGems')
 
     expect(workflow.fetch('permissions')).to eq('contents' => 'read')
     expect(workflow.dig('jobs', 'push-gem', 'environment')).to eq('release')
-    expect(credentials.fetch('uses')).to eq(
-      'rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a'
+    expect(push.fetch('env')).to include(
+      'GEM_HOST_API_KEY' => '${{ secrets.RUBYGEMS_API_TOKEN }}'
     )
-    expect(credentials.fetch('with')).to eq(
-      'api-token' => '${{ secrets.RUBYGEMS_API_TOKEN }}'
-    )
-    expect(push.fetch('env')).not_to have_key('GEM_HOST_API_KEY')
     workflow_source = File.read(File.expand_path('../../.github/workflows/release.yml', __dir__))
     expect(workflow_source).not_to include('rubygems_')
   end

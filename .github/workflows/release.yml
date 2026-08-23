@@ -91,12 +91,8 @@ jobs:
 
           echo "gem_path=$gem_file" >> "$GITHUB_OUTPUT"
 
-      - name: Configure RubyGems credentials
-        uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
-        with:
-          api-token: ${{ secrets.RUBYGEMS_API_TOKEN }}
-
       - name: Push to RubyGems
         env:
           GEM_FILE: ${{ steps.build.outputs.gem_path }}
+          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_TOKEN }}
         run: gem push "$GEM_FILE" --host https://rubygems.org
