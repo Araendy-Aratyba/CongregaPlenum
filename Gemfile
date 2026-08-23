@@ -8,7 +8,7 @@ gemspec
 gem 'logger', '~> 1.7'
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.0'
-gem 'rubocop', '~> 1.21'
+gem 'rubocop', '~> 1.89'
 
 gem 'yard', '~> 0.9.45'
 
