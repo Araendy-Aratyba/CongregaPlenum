@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "shopify.ruby-lsp",
+    "koichisasada.vscode-rdbg"
+  ],
+  "unwantedRecommendations": [
+    "castwide.solargraph",
+    "misogi.ruby-rubocop",
+    "sorbet.sorbet-vscode-extension"
+  ]
+}
