@@ -1,6 +1,7 @@
 # CongregaPlenum
 
 [![CI](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml/badge.svg)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fzarbielli.github.io%2FCongregaPlenum%2Fcoverage.json)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
 [![Documentation](https://github.com/zarbielli/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://zarbielli.github.io/CongregaPlenum/)
 [![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
 

@@ -35,6 +35,12 @@ jobs:
       - name: Generate YARD docs
         run: bundle exec yard doc
 
+      - name: Run specs for coverage
+        run: bundle exec rspec
+
+      - name: Generate coverage badge endpoint
+        run: bundle exec ruby scripts/generate_coverage_badge.rb
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
 

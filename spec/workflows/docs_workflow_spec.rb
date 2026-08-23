@@ -3,6 +3,7 @@
 require 'spec_helper'
 require 'yaml'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Docs workflow' do
   let(:workflow) do
     YAML.safe_load_file(File.expand_path('../../.github/workflows/docs.yml', __dir__), aliases: true)
@@ -30,4 +31,19 @@ RSpec.describe 'Docs workflow' do
     expect(steps.find { |step| step['uses'] == 'actions/upload-pages-artifact@v5' }.fetch('with'))
       .to eq('path' => './doc')
   end
+
+  it 'publica o endpoint do badge após calcular a cobertura' do
+    commands = steps.filter_map { |step| step['run'] }
+
+    expect(commands).to include(
+      'bundle exec rspec',
+      'bundle exec ruby scripts/generate_coverage_badge.rb'
+    )
+
+    badge_step = steps.index { |step| step['run'] == 'bundle exec ruby scripts/generate_coverage_badge.rb' }
+    upload_step = steps.index { |step| step['uses'] == 'actions/upload-pages-artifact@v5' }
+
+    expect(badge_step).to be < upload_step
+  end
 end
+# rubocop:enable Metrics/BlockLength

@@ -8,6 +8,8 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Badge dinâmico de cobertura no README, atualizado pelo SimpleCov e publicado
+  junto com a documentação no GitHub Pages.
 - Serviço de votações com listagem, detalhe, votos individuais, orientações de
   bancada e consultas por proposição, evento e órgão.
 - Assinaturas RBS e validação com Steep.
