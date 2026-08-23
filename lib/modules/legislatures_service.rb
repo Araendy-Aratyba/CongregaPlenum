@@ -19,21 +19,21 @@ module CongregaPlenum
         @client ||= CongregaPlenum::Client.instance
       end
 
-      # Resilient wrapper around {Client#get} guaranteeing callers always receive
-      # a predictable structure even when the API misbehaves.
+      # Wraps {Client#get} to add service context without hiding request failures.
       def api_get(endpoint, params = {})
         client.get(endpoint, params)
       rescue StandardError => e
         log_error("Erro ao acessar API em #{endpoint}: #{e.message}")
-        { 'dados' => [] }
+        raise
       end
 
-      # Bulk variant of {.api_get} protecting pagination loops.
+      # Bulk variant of {.api_get}. Failures are propagated so consumers can
+      # abort an incomplete synchronization.
       def api_get_paginated(endpoint, params = {})
         client.get_paginated(endpoint, params)
       rescue StandardError => e
         log_error("Erro paginando API em #{endpoint}: #{e.message}")
-        []
+        raise
       end
 
       # Returns every legislature exposed by a API.
@@ -46,9 +46,6 @@ module CongregaPlenum
 
         log_info("Total de #{legislatures.size} legislaturas encontradas")
         legislatures
-      rescue StandardError => e
-        log_error("Erro ao buscar legislaturas: #{e.message}")
-        []
       end
 
       # Fetches a single legislature payload.
@@ -60,9 +57,6 @@ module CongregaPlenum
 
         response = api_get("legislaturas/#{legislature_id}")
         response['dados']
-      rescue StandardError => e
-        log_error("Erro ao buscar legislatura #{legislature_id}: #{e.message}")
-        nil
       end
 
       # Retrieves the mesa composition for the provided legislature ID.
@@ -75,9 +69,6 @@ module CongregaPlenum
 
         log_info("Mesa da legislatura #{legislature_id} coletada com #{mesa_data.size} integrantes")
         mesa_data
-      rescue StandardError => e
-        log_error("Erro ao buscar mesa da legislatura #{legislature_id}: #{e.message}")
-        []
       end
 
       # Lists every deputy that served/serves in the given legislature using the
@@ -92,9 +83,6 @@ module CongregaPlenum
 
         log_info("Coletamos #{deputies.size} deputados para a legislatura #{legislature_id}")
         deputies
-      rescue StandardError => e
-        log_error("Erro ao buscar deputados da legislatura #{legislature_id}: #{e.message}")
-        []
       end
 
       private

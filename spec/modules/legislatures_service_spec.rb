@@ -52,10 +52,18 @@ RSpec.describe CongregaPlenum::LegislaturesService do
   end
 
   describe '.fetch_by_id' do
-    it 'retorna array vazio quando api falha' do
-      allow(client_double).to receive(:get).and_raise(StandardError, 'oops')
+    it 'propaga a falha da API' do
+      expect(client_double).to receive(:get).and_raise(CongregaPlenum::APIError, 'oops')
 
-      expect(described_class.fetch_by_id(60)).to eq([])
+      expect { described_class.fetch_by_id(60) }.to raise_error(CongregaPlenum::APIError, 'oops')
+    end
+  end
+
+  describe '.fetch_all quando a API falha' do
+    it 'propaga a falha em vez de retornar uma sincronização vazia' do
+      expect(client_double).to receive(:get_paginated).and_raise(CongregaPlenum::ConnectionError, 'offline')
+
+      expect { described_class.fetch_all }.to raise_error(CongregaPlenum::ConnectionError, 'offline')
     end
   end
 end

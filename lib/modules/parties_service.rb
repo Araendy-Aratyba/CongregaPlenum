@@ -19,21 +19,21 @@ module CongregaPlenum
         @client ||= CongregaPlenum::Client.instance
       end
 
-      # Defensive wrapper around {Client#get} so transient errors do not break
-      # the synchronization loop.
+      # Wraps {Client#get} to add service context without hiding request failures.
       def api_get(endpoint, params = {})
         client.get(endpoint, params)
       rescue StandardError => e
         log_error("Erro ao acessar API em #{endpoint}: #{e.message}")
-        { 'dados' => [] }
+        raise
       end
 
-      # Bulk variant of {.api_get} that shields pagination from runtime errors.
+      # Bulk variant of {.api_get}. Failures are propagated so consumers can
+      # abort an incomplete synchronization.
       def api_get_paginated(endpoint, params = {})
         client.get_paginated(endpoint, params)
       rescue StandardError => e
         log_error("Erro paginando API em #{endpoint}: #{e.message}")
-        []
+        raise
       end
 
       # Fetches every party registered na API, enriquecendo com payload detalhado.
@@ -61,10 +61,6 @@ module CongregaPlenum
 
         response = api_get("partidos/#{party_id}")
         response['dados']
-      rescue StandardError => e
-        log_error("Erro ao buscar partido #{party_id}: #{e.message}")
-
-        nil
       end
 
       # Returns a paginated list of parties, without triggering detail lookups.

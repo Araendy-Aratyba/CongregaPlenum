@@ -19,21 +19,21 @@ module CongregaPlenum
         @client ||= CongregaPlenum::Client.instance
       end
 
-      # Wraps {Client#get} so low-level failures don't crash long-running jobs.
-      # Instead, we log the incident and return a consistent fallback.
+      # Wraps {Client#get} to add service context without hiding request failures.
       def api_get(endpoint, params = {})
         client.get(endpoint, params)
       rescue StandardError => e
         log_error("Erro ao acessar API em #{endpoint}: #{e.message}")
-        { 'dados' => [] }
+        raise
       end
 
-      # Same as {.api_get}, but for bulk pagination calls.
+      # Same as {.api_get}, but for bulk pagination calls. Failures are propagated
+      # so consumers can abort an incomplete synchronization.
       def api_get_paginated(endpoint, params = {})
         client.get_paginated(endpoint, params)
       rescue StandardError => e
         log_error("Erro paginando API em #{endpoint}: #{e.message}")
-        []
+        raise
       end
 
       # Fetches the entire list of congressmen regardless of legislature.
@@ -64,9 +64,6 @@ module CongregaPlenum
 
         response = api_get("deputados/#{deputy_id}")
         response['dados']
-      rescue StandardError => e
-        log_error("Erro ao buscar deputado #{deputy_id}: #{e.message}")
-        nil
       end
 
       # Returns a paginated list of congressmen straight from the API, without
