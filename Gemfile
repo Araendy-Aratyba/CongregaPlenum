@@ -14,7 +14,7 @@ gem 'yard', '~> 0.9.37'
 
 group :test do
   gem 'simplecov', '~> 0.22', require: false
-  gem 'vcr', '~> 6.2'
+  gem 'vcr', '~> 6.4'
   gem 'webmock', '~> 3.23'
 end
 
