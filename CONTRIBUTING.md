@@ -73,4 +73,4 @@ Um pull request deve:
 - evitar alterações não relacionadas.
 
 O mantenedor pode solicitar ajustes antes do merge. Contribuições são aceitas
-sob a licença [GPL-2.0](LICENSE) do projeto.
+sob a licença [AGPL-3.0-or-later](LICENSE) do projeto.

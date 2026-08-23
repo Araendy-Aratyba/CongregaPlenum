@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description = 'HTTP client with pagination, retries and logging for Câmara dos Deputados open data endpoints.'
   spec.homepage = 'https://github.com/zarbielli/CongregaPlenum'
   spec.required_ruby_version = '>= 3.4.0'
-  spec.license = 'GPL-2.0-only'
+  spec.license = 'AGPL-3.0-or-later'
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
   spec.metadata['homepage_uri'] = spec.homepage

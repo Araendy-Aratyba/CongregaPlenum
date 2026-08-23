@@ -3,8 +3,16 @@
 require 'spec_helper'
 
 RSpec.describe 'congrega_plenum.gemspec' do
+  let(:gem_specification) do
+    Gem::Specification.load(File.expand_path('../congrega_plenum.gemspec', __dir__))
+  end
+
   subject(:packaged_files) do
-    Gem::Specification.load(File.expand_path('../congrega_plenum.gemspec', __dir__)).files
+    gem_specification.files
+  end
+
+  it 'declara o copyleft de rede da AGPLv3 ou posterior' do
+    expect(gem_specification.license).to eq('AGPL-3.0-or-later')
   end
 
   it 'inclui apenas os arquivos necessários em runtime e as assinaturas' do

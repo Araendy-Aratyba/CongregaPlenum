@@ -4,7 +4,7 @@
 [![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fzarbielli.github.io%2FCongregaPlenum%2Fcoverage.json)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
 [![Documentation](https://github.com/zarbielli/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://zarbielli.github.io/CongregaPlenum/)
 [![Gem Version](https://img.shields.io/gem/v/congrega_plenum.svg)](https://rubygems.org/gems/congrega_plenum)
-[![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
+[![License: AGPL-3.0-or-later](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg)](LICENSE)
 
 Cliente Ruby para a [API de Dados Abertos da Câmara dos Deputados](https://dadosabertos.camara.leg.br/),
 com paginação, retries, logging e serviços para deputados, partidos e
@@ -27,7 +27,7 @@ sincronizações e aplicações de dados cívicos.
 Adicione a gem ao seu `Gemfile`:
 
 ```ruby
-gem 'congrega_plenum', '~> 0.1.0'
+gem 'congrega_plenum', '~> 0.2.0'
 ```
 
 Depois execute:
@@ -39,7 +39,7 @@ bundle install
 Ou instale diretamente pelo RubyGems:
 
 ```bash
-gem install congrega_plenum -v '~> 0.1.0'
+gem install congrega_plenum -v '~> 0.2.0'
 ```
 
 Consulte a [página da gem no RubyGems](https://rubygems.org/gems/congrega_plenum)
@@ -137,7 +137,9 @@ públicas; siga a [política de segurança](SECURITY.md).
 
 ## Licença
 
-Distribuído sob a [GNU General Public License v2.0](LICENSE).
+Distribuído sob a [GNU Affero General Public License v3.0 ou posterior](LICENSE).
+Aplicações que incorporam a gem e são distribuídas ou disponibilizadas para
+uso por rede devem observar as obrigações de código-fonte da AGPL.
 
 CongregaPlenum é um projeto independente e não é afiliado à Câmara dos
 Deputados.

@@ -6,6 +6,16 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## Unreleased
 
+## [0.2.0] - 2026-08-23
+
+### Changed
+
+- Licença alterada de `GPL-2.0-only` para `AGPL-3.0-or-later`, aplicável a
+  partir desta versão. A versão `0.1.0` permanece disponível sob os termos da
+  licença com que foi originalmente publicada.
+
+## [0.1.0] - 2026-08-23
+
 ### Added
 
 - Badge dinâmico de cobertura no README, atualizado pelo SimpleCov e publicado
