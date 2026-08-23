@@ -3,15 +3,13 @@
 [![CI](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml/badge.svg)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fzarbielli.github.io%2FCongregaPlenum%2Fcoverage.json)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
 [![Documentation](https://github.com/zarbielli/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://zarbielli.github.io/CongregaPlenum/)
+[![Gem Version](https://img.shields.io/gem/v/congrega_plenum.svg)](https://rubygems.org/gems/congrega_plenum)
 [![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
 
 Cliente Ruby para a [API de Dados Abertos da Câmara dos Deputados](https://dadosabertos.camara.leg.br/),
 com paginação, retries, logging e serviços para deputados, partidos e
-legislaturas. O projeto inclui assinaturas RBS e uma API orientada a
+legislaturas e votações. O projeto inclui assinaturas RBS e uma API orientada a
 sincronizações e aplicações de dados cívicos.
-
-> O projeto está em desenvolvimento inicial e ainda não possui uma versão
-> publicada no RubyGems.
 
 - [Documentação da API](https://zarbielli.github.io/CongregaPlenum/)
 - [Como contribuir](CONTRIBUTING.md)
@@ -26,11 +24,10 @@ sincronizações e aplicações de dados cívicos.
 
 ## Instalação
 
-Enquanto não houver uma versão publicada no RubyGems, adicione o repositório ao
-seu `Gemfile`:
+Adicione a gem ao seu `Gemfile`:
 
 ```ruby
-gem 'congrega_plenum', github: 'zarbielli/CongregaPlenum'
+gem 'congrega_plenum', '~> 0.1.0'
 ```
 
 Depois execute:
@@ -38,6 +35,15 @@ Depois execute:
 ```bash
 bundle install
 ```
+
+Ou instale diretamente pelo RubyGems:
+
+```bash
+gem install congrega_plenum -v '~> 0.1.0'
+```
+
+Consulte a [página da gem no RubyGems](https://rubygems.org/gems/congrega_plenum)
+para conferir as versões publicadas.
 
 ## Configuração
 
