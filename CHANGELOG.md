@@ -20,6 +20,7 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Retry restrito a falhas de conexão, HTTP `429` e HTTP `5xx`.
 - Pacote da gem limitado aos arquivos necessários em runtime.
 - Workflow de release vinculado ao tag, versão e artefato validados.
+- Autenticação de release migrada para Trusted Publishing com OIDC.
 
 ### Fixed
 

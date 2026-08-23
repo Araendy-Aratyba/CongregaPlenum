@@ -44,5 +44,19 @@ RSpec.describe 'Release workflow' do
     expect(push.fetch('run')).to eq('gem push "$GEM_FILE" --host https://rubygems.org')
     expect(push.fetch('run')).not_to include('*.gem')
   end
+
+  it 'autentica no RubyGems por OIDC sem armazenar uma chave permanente' do
+    credentials = step_named('Configure RubyGems credentials')
+    push = step_named('Push to RubyGems')
+
+    expect(workflow.fetch('permissions')).to eq('contents' => 'read', 'id-token' => 'write')
+    expect(workflow.dig('jobs', 'push-gem', 'environment')).to eq('release')
+    expect(credentials.fetch('uses')).to eq(
+      'rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a'
+    )
+    expect(push.fetch('env')).not_to have_key('GEM_HOST_API_KEY')
+    expect(File.read(File.expand_path('../../.github/workflows/release.yml', __dir__)))
+      .not_to include('RUBYGEMS_API_KEY')
+  end
 end
 # rubocop:enable Metrics/BlockLength
