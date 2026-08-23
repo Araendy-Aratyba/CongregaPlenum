@@ -1,0 +1,52 @@
+name: Relatar um bug
+description: Informe um comportamento incorreto ou inesperado.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Obrigado por ajudar a melhorar o CongregaPlenum.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Descrição do problema
+      description: Explique o que aconteceu e qual era o comportamento esperado.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Como reproduzir
+      description: Forneça um exemplo mínimo, endpoint e dados não sensíveis.
+      placeholder: |
+        1. Configure...
+        2. Execute...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Informe versões do Ruby, Bundler e CongregaPlenum, além do sistema operacional.
+      placeholder: |
+        Ruby: 3.4.6
+        Bundler: 2.7.2
+        CongregaPlenum: commit ou versão
+        Sistema operacional:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs relevantes
+      description: Remova tokens, credenciais e dados pessoais antes de enviar.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Pesquisei issues existentes e não encontrei uma duplicata.
+          required: true
+        - label: Removi credenciais e dados sensíveis do relato.
+          required: true

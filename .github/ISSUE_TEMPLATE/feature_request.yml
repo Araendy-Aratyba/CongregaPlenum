@@ -1,0 +1,32 @@
+name: Propor uma melhoria
+description: Sugira uma funcionalidade ou evolução da API.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Problema ou motivação
+      description: Qual necessidade de usuário ou integração esta proposta resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solução proposta
+      description: Descreva a API e o comportamento esperados.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Liste soluções temporárias ou abordagens descartadas.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Pesquisei issues existentes e não encontrei uma proposta equivalente.
+          required: true
+        - label: A proposta está alinhada à API de Dados Abertos da Câmara dos Deputados.
+          required: true

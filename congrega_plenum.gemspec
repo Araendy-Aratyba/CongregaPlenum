@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   # Package only runtime, type signature and legal/documentation source files.
   # Generated documentation and coverage reports must never ship in the gem.
   spec.files = Dir.chdir(__dir__) do
-    Dir.glob(%w[LICENSE README.md lib/**/*.rb sig/**/*.rbs])
+    Dir.glob(%w[CHANGELOG.md LICENSE README.md lib/**/*.rb sig/**/*.rbs])
   end
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }

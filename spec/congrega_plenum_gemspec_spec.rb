@@ -8,8 +8,14 @@ RSpec.describe 'congrega_plenum.gemspec' do
   end
 
   it 'inclui apenas os arquivos necessários em runtime e as assinaturas' do
-    expect(packaged_files).to include('LICENSE', 'README.md', 'lib/congrega_plenum.rb', 'sig/congrega_plenum.rbs')
-    expect(packaged_files).to all(match(%r{\A(?:LICENSE|README\.md|lib/.+\.rb|sig/.+\.rbs)\z}))
+    expect(packaged_files).to include(
+      'CHANGELOG.md',
+      'LICENSE',
+      'README.md',
+      'lib/congrega_plenum.rb',
+      'sig/congrega_plenum.rbs'
+    )
+    expect(packaged_files).to all(match(%r{\A(?:CHANGELOG\.md|LICENSE|README\.md|lib/.+\.rb|sig/.+\.rbs)\z}))
   end
 
   it 'exclui documentação e cobertura geradas' do

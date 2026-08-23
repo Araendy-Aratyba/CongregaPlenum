@@ -1,45 +1,64 @@
 # CongregaPlenum
 
-CongregaPlenum é uma gem Ruby voltada para integrações com os dados abertos da Câmara
-dos Deputados. Ela encapsula HTTP, paginação, retries e log em serviços
-especializados (deputados, partidos e legislaturas), expondo uma API Ruby
-consistente e segura para aplicações de sincronização ou dashboards.
+[![CI](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml/badge.svg)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
+[![Documentation](https://github.com/zarbielli/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://zarbielli.github.io/CongregaPlenum/)
+[![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
+
+Cliente Ruby para a [API de Dados Abertos da Câmara dos Deputados](https://dadosabertos.camara.leg.br/),
+com paginação, retries, logging e serviços para deputados, partidos e
+legislaturas. O projeto inclui assinaturas RBS e uma API orientada a
+sincronizações e aplicações de dados cívicos.
+
+> O projeto está em desenvolvimento inicial e ainda não possui uma versão
+> publicada no RubyGems.
+
+- [Documentação da API](https://zarbielli.github.io/CongregaPlenum/)
+- [Como contribuir](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+- [Política de segurança](SECURITY.md)
+- [Código de conduta](CODE_OF_CONDUCT.md)
+
+## Requisitos
+
+- Ruby 3.4 ou superior
+- Bundler 2.7 ou compatível
 
 ## Instalação
 
-Adicione ao seu `Gemfile`:
+Enquanto não houver uma versão publicada no RubyGems, adicione o repositório ao
+seu `Gemfile`:
 
 ```ruby
-gem 'congrega_plenum', github: 'NOME_ORGANIZACAO/congrega_plenum'
+gem 'congrega_plenum', github: 'zarbielli/CongregaPlenum'
 ```
 
-Ou via linha de comando:
+Depois execute:
 
 ```bash
-bundle add congrega_plenum --github NOME_ORGANIZACAO/congrega_plenum
+bundle install
 ```
 
-Depois disso rode `bundle install`.
-
 ## Configuração
-
-Toda configuração é centralizada em `CongregaPlenum.configure`:
 
 ```ruby
 CongregaPlenum.configure do |config|
   config.base_url = 'https://dadosabertos.camara.leg.br/api/v2'
   config.timeout = 20
   config.retries = 5
+  config.retry_delay = 1.0
+  config.rate_limit_delay = 0.1
   config.logger = Logger.new($stdout)
 end
 ```
 
-Os valores padrão já apontam para os endpoints oficiais, com timeouts e retries
-ajustados para o comportamento atual da API.
+Os valores padrão já apontam para os endpoints oficiais. Requisições são
+repetidas somente em falhas transitórias: conexão, HTTP `429` e HTTP `5xx`.
+Erros `4xx` e respostas inválidas são propagados para que uma sincronização
+parcial não seja confundida com uma resposta vazia.
 
 ## Uso
 
-Exemplo básico coletando todos os deputados da legislatura corrente:
+Exemplo coletando os deputados de uma legislatura específica:
 
 ```ruby
 deputados = CongregaPlenum::CongressmenService.fetch_all_by_legislature(57)
@@ -52,47 +71,40 @@ end
 Outros fluxos disponíveis:
 
 - `CongregaPlenum::CongressmenService.fetch_list(page:, items_per_page:, legislature_id:)`
+- `CongregaPlenum::CongressmenService.fetch_by_id(deputy_id)`
 - `CongregaPlenum::PartiesService.fetch_all`
 - `CongregaPlenum::LegislaturesService.fetch_mesa(legislature_id)`
+- `CongregaPlenum::LegislaturesService.fetch_deputies(legislature_id)`
 
-Caso precise de um controle mais fino, use diretamente `CongregaPlenum::Client`.
+Para controle de baixo nível, use `CongregaPlenum::Client`. Consulte a
+[documentação YARD](https://zarbielli.github.io/CongregaPlenum/) para os contratos
+completos.
 
-## Documentação
-
-Para gerar a documentação com YARD execute:
+## Desenvolvimento
 
 ```bash
+bin/setup
+bundle exec rake
+bundle exec steep check
 bundle exec yard doc
+bundle exec rake build
 ```
 
-Os arquivos HTML serão criados em `doc/`. Abra `doc/index.html` no navegador para consultar as classes, módulos e métodos disponíveis. Na `main`, a action `Docs` publica essa pasta no GitHub Pages (`https://zarbielli.github.io/CongregaPlenum/`).
-
-## Development
-
-1. `bin/setup` instala dependências.
-2. `bundle exec rspec` roda a suíte (SimpleCov gera `coverage/index.html`).
-3. `bundle exec steep check` valida as assinaturas RBS.
-4. `bundle exec rubocop` garante estilo consistente.
-
-Para publicar localmente:
-
-```bash
-bundle exec rake install
-```
-
-Ou para liberar uma versão (ajuste `lib/version.rb` antes):
-
-```bash
-bundle exec rake release
-```
+- `bundle exec rake` executa RSpec e RuboCop.
+- `bundle exec steep check` valida as assinaturas RBS.
+- `bundle exec yard doc` gera a documentação em `doc/`.
+- `bundle exec rake build` constrói a gem em `pkg/`.
 
 ## Contribuindo
 
-Issues e pull requests são bem-vindos. Abra um PR com:
+Issues e pull requests são bem-vindos. Antes de começar, leia o
+[guia de contribuição](CONTRIBUTING.md) e o [código de
+conduta](CODE_OF_CONDUCT.md). Vulnerabilidades não devem ser abertas como issues
+públicas; siga a [política de segurança](SECURITY.md).
 
-- Descrição do problema/feature
-- Cobertura de testes (RSpec)
-- Atualização de documentação se necessário
+## Licença
 
-Vamos manter o padrão de logs em português e comentários explicando o *porquê* das
-decisões. Ajustes são muito bem-vindos!
+Distribuído sob a [GNU General Public License v2.0](LICENSE).
+
+CongregaPlenum é um projeto independente e não é afiliado à Câmara dos
+Deputados.
