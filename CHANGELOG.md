@@ -23,5 +23,7 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Fixed
 
+- Carregamento de `CongregaPlenum::VERSION` ao exigir a gem instalada sem
+  Bundler.
 - Consulta de deputados por legislatura passou a usar o endpoint oficial com o
   filtro `idLegislatura`.
