@@ -80,17 +80,15 @@ module CongregaPlenum
         []
       end
 
-      # Lists every deputy that served/serves in the given legislature.
+      # Lists every deputy that served/serves in the given legislature using the
+      # +idLegislatura+ filter supported by the deputies endpoint.
       #
       # @param legislature_id [Integer]
       # @return [Array<Hash>]
       def fetch_deputies(legislature_id)
         log_info("Iniciando coleta de deputados da legislatura #{legislature_id}")
 
-        deputies = api_get_paginated(
-          "legislaturas/#{legislature_id}/deputados",
-          itens: DEPUTIES_PAGE_SIZE
-        )
+        deputies = api_get_paginated('deputados', itens: DEPUTIES_PAGE_SIZE, idLegislatura: legislature_id)
 
         log_info("Coletamos #{deputies.size} deputados para a legislatura #{legislature_id}")
         deputies

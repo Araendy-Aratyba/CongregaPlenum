@@ -35,10 +35,16 @@ RSpec.describe CongregaPlenum::LegislaturesService do
   end
 
   describe '.fetch_deputies' do
-    it 'usa paginação dedicada' do
+    it 'filtra o endpoint de deputados pela legislatura' do
       deputies = [CongregaPlenum::Factories.deputy_payload]
       expect(client_double).to receive(:get_paginated)
-        .with('legislaturas/59/deputados', { itens: CongregaPlenum::LegislaturesService::DEPUTIES_PAGE_SIZE })
+        .with(
+          'deputados',
+          {
+            itens: CongregaPlenum::LegislaturesService::DEPUTIES_PAGE_SIZE,
+            idLegislatura: 59
+          }
+        )
         .and_return(deputies)
 
       expect(described_class.fetch_deputies(59)).to eq(deputies)
