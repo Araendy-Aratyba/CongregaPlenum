@@ -12,6 +12,7 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Documentação YARD publicada pelo GitHub Pages.
 - Arquivos e templates para contribuições da comunidade.
 - Política de segurança com reporte privado de vulnerabilidades.
+- CI com validações de estilo, tipos, testes, documentação e build da gem.
 
 ### Changed
 

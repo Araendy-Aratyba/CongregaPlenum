@@ -31,6 +31,14 @@ jobs:
       - name: RuboCop
         run: bundle exec rubocop
 
+      - name: Steep
+        run: bundle exec steep check
+
       - name: RSpec
         run: bundle exec rspec
 
+      - name: Validate YARD documentation
+        run: bundle exec yard stats --list-undoc
+
+      - name: Build gem
+        run: bundle exec rake build
