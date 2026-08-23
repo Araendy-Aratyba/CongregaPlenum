@@ -5,18 +5,27 @@ on:
     inputs:
       tag:
         description: 'Tag/version to release (e.g., v0.1.0)'
-        required: false
+        required: true
+        type: string
 
 permissions:
   contents: read
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   push-gem:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.tag }}
+          persist-credentials: false
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -24,10 +33,65 @@ jobs:
           ruby-version: '3.4'
           bundler-cache: true
 
+      - name: Validate requested release
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          version="$(ruby -Ilib -rversion -e 'print CongregaPlenum::VERSION')"
+          expected_tag="v${version}"
+          checked_out_tag="$(git describe --tags --exact-match HEAD 2>/dev/null || true)"
+
+          if [[ "$RELEASE_TAG" != "$expected_tag" ]]; then
+            echo "Requested tag $RELEASE_TAG does not match gem version $version" >&2
+            exit 1
+          fi
+
+          if [[ "$checked_out_tag" != "$RELEASE_TAG" ]]; then
+            echo "Checked out commit is not tagged as $RELEASE_TAG" >&2
+            exit 1
+          fi
+
+      - name: Verify project
+        run: bundle exec rake
+
       - name: Build gem
-        run: bundle exec rake build
+        id: build
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+
+          version="${RELEASE_TAG#v}"
+          gem_file="pkg/congrega_plenum-${version}.gem"
+
+          bundle exec rake build
+
+          if [[ ! -f "$gem_file" ]]; then
+            echo "Expected artifact $gem_file was not built" >&2
+            exit 1
+          fi
+
+          shopt -s nullglob
+          artifacts=(pkg/*.gem)
+          if (( ${#artifacts[@]} != 1 )); then
+            echo "Expected exactly one gem artifact, found ${#artifacts[@]}" >&2
+            exit 1
+          fi
+
+          gem_name="$(ruby -rrubygems/package -e 'print Gem::Package.new(ARGV.fetch(0)).spec.name' "$gem_file")"
+          gem_version="$(ruby -rrubygems/package -e 'print Gem::Package.new(ARGV.fetch(0)).spec.version' "$gem_file")"
+
+          if [[ "$gem_name" != 'congrega_plenum' || "$gem_version" != "$version" ]]; then
+            echo "Artifact metadata does not match congrega_plenum $version" >&2
+            exit 1
+          fi
+
+          echo "gem_path=$gem_file" >> "$GITHUB_OUTPUT"
 
       - name: Push to RubyGems
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: gem push pkg/*.gem
+          GEM_FILE: ${{ steps.build.outputs.gem_path }}
+        run: gem push "$GEM_FILE" --host https://rubygems.org
