@@ -24,8 +24,8 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Retry restrito a falhas de conexão, HTTP `429` e HTTP `5xx`.
 - Pacote da gem limitado aos arquivos necessários em runtime.
 - Workflow de release vinculado ao tag, versão e artefato validados.
-- Autenticação de release configurada com chave do RubyGems armazenada como
-  secret no ambiente protegido `release` do GitHub Actions.
+- Autenticação de release configurada com Trusted Publishing (OIDC) no ambiente
+  protegido `release` do GitHub Actions, sem chave permanente ou OTP no CI.
 
 ### Fixed
 

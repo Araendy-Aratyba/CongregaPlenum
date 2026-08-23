@@ -45,16 +45,21 @@ RSpec.describe 'Release workflow' do
     expect(push.fetch('run')).not_to include('*.gem')
   end
 
-  it 'autentica no RubyGems com o secret protegido do ambiente de release' do
+  it 'autentica no RubyGems por Trusted Publishing no ambiente de release' do
+    credentials = step_named('Configure RubyGems credentials')
     push = step_named('Push to RubyGems')
 
-    expect(workflow.fetch('permissions')).to eq('contents' => 'read')
-    expect(workflow.dig('jobs', 'push-gem', 'environment')).to eq('release')
-    expect(push.fetch('env')).to include(
-      'GEM_HOST_API_KEY' => '${{ secrets.RUBYGEMS_API_TOKEN }}'
+    expect(workflow.fetch('permissions')).to eq(
+      'contents' => 'read',
+      'id-token' => 'write'
     )
+    expect(workflow.dig('jobs', 'push-gem', 'environment')).to eq('release')
+    expect(credentials.fetch('uses')).to match(
+      %r{\Arubygems/configure-rubygems-credentials@[0-9a-f]{40}\z}
+    )
+    expect(push.fetch('env')).not_to have_key('GEM_HOST_API_KEY')
     workflow_source = File.read(File.expand_path('../../.github/workflows/release.yml', __dir__))
-    expect(workflow_source).not_to include('rubygems_')
+    expect(workflow_source).not_to include('RUBYGEMS_API_TOKEN', 'secrets.')
   end
 end
 # rubocop:enable Metrics/BlockLength

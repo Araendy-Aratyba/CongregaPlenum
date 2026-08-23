@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: release
@@ -91,8 +92,10 @@ jobs:
 
           echo "gem_path=$gem_file" >> "$GITHUB_OUTPUT"
 
+      - name: Configure RubyGems credentials
+        uses: rubygems/configure-rubygems-credentials@abfabee9aa68f1c2c95a6f58c91d826e5fac33da
+
       - name: Push to RubyGems
         env:
           GEM_FILE: ${{ steps.build.outputs.gem_path }}
-          GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_TOKEN }}
         run: gem push "$GEM_FILE" --host https://rubygems.org
