@@ -19,6 +19,7 @@ group :test do
 end
 
 group :development do
+  gem 'debug', '~> 1.11'
   gem 'pry', '~> 0.15.2'
   gem 'steep', '~> 1.10'
 end
