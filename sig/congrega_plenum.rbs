@@ -4,6 +4,9 @@ module CongregaPlenum
   type payload_hash = ::Hash[String, untyped]
   type payload_list = ::Array[payload_hash]
   type detail_payload = payload_hash?
+  type identifier_filter = Integer | String | ::Array[Integer] | ::Array[String]
+  type numeric_filter = Integer | ::Array[Integer]
+  type date_filter = String | Date
 
   class Error < ::StandardError
   end
@@ -143,5 +146,60 @@ module CongregaPlenum
     def self.log_info: (String) -> void
     def self.log_error: (String) -> void
     def self.log_debug: (String) -> void
+  end
+
+  class VotingsService
+    ITEMS_PER_PAGE: Integer
+    DEFAULT_ORDER: String
+    DEFAULT_ORDER_BY: String
+    SERVICE_TAG: String
+
+    def self.client: () -> CongregaPlenum::Client
+    def self.api_get: (String, ?params_hash) -> payload_hash
+    def self.api_get_paginated: (String, ?params_hash) -> payload_list
+    def self.fetch_all: (?
+      voting_ids: identifier_filter?,
+      proposition_ids: numeric_filter?,
+      event_ids: numeric_filter?,
+      body_ids: numeric_filter?,
+      start_date: date_filter?,
+      end_date: date_filter?,
+      order: String,
+      order_by: String
+    ) -> payload_list
+    def self.fetch_list: (?
+      page: Integer,
+      items_per_page: Integer,
+      voting_ids: identifier_filter?,
+      proposition_ids: numeric_filter?,
+      event_ids: numeric_filter?,
+      body_ids: numeric_filter?,
+      start_date: date_filter?,
+      end_date: date_filter?,
+      order: String,
+      order_by: String
+    ) -> payload_list
+    def self.fetch_by_id: (String | Integer) -> detail_payload
+    def self.fetch_votes: (String | Integer) -> payload_list
+    def self.fetch_orientations: (String | Integer) -> payload_list
+    def self.fetch_by_proposition: (Integer, ?order: String, ?order_by: String) -> payload_list
+    def self.fetch_by_event: (Integer) -> payload_list
+    def self.fetch_by_body: (
+      Integer,
+      ?proposition_ids: numeric_filter?,
+      ?start_date: date_filter?,
+      ?end_date: date_filter?,
+      ?order: String,
+      ?order_by: String
+    ) -> payload_list
+    def self.list_params: (params_hash) -> params_hash
+    def self.pagination_params: (params_hash) -> params_hash
+    def self.normalize_filter: (identifier_filter?) -> (String | Integer)?
+    def self.normalize_date: (date_filter?) -> String?
+    def self.extract_detail: (payload_hash, String) -> detail_payload
+    def self.extract_collection: (payload_hash, String) -> payload_list
+    def self.logger: () -> Logger
+    def self.log_info: (String) -> void
+    def self.log_error: (String) -> void
   end
 end

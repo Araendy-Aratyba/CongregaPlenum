@@ -75,6 +75,32 @@ Outros fluxos disponíveis:
 - `CongregaPlenum::PartiesService.fetch_all`
 - `CongregaPlenum::LegislaturesService.fetch_mesa(legislature_id)`
 - `CongregaPlenum::LegislaturesService.fetch_deputies(legislature_id)`
+- `CongregaPlenum::VotingsService.fetch_all(start_date:, end_date:)`
+- `CongregaPlenum::VotingsService.fetch_by_id(voting_id)`
+- `CongregaPlenum::VotingsService.fetch_votes(voting_id)`
+- `CongregaPlenum::VotingsService.fetch_orientations(voting_id)`
+
+Uma votação representa uma decisão legislativa individual já concluída. Uma
+proposição pode ser afetada por várias votações de pareceres, emendas,
+requerimentos e destaques relacionados. Por isso, detalhes, votos individuais e
+orientações de bancada são expostos separadamente:
+
+```ruby
+votacoes = CongregaPlenum::VotingsService.fetch_all(
+  proposition_ids: [2_345_678],
+  start_date: '2026-01-01',
+  end_date: '2026-12-31'
+)
+
+votacao = CongregaPlenum::VotingsService.fetch_by_id(votacoes.first['id'])
+votos = CongregaPlenum::VotingsService.fetch_votes(votacao['id'])
+orientacoes = CongregaPlenum::VotingsService.fetch_orientations(votacao['id'])
+```
+
+Sem filtros de data ou identificadores, a API da Câmara limita a listagem de
+votações aos 30 dias anteriores. As duas datas de um intervalo devem pertencer
+ao mesmo ano. Votações simbólicas normalmente não possuem votos individuais, e
+uma lista de votos vazia não identifica quais deputados estavam ausentes.
 
 Para controle de baixo nível, use `CongregaPlenum::Client`. Consulte a
 [documentação YARD](https://zarbielli.github.io/CongregaPlenum/) para os contratos

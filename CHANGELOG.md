@@ -8,6 +8,8 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Added
 
+- Serviço de votações com listagem, detalhe, votos individuais, orientações de
+  bancada e consultas por proposição, evento e órgão.
 - Assinaturas RBS e validação com Steep.
 - Documentação YARD publicada pelo GitHub Pages.
 - Arquivos e templates para contribuições da comunidade.

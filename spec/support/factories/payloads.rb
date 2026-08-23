@@ -39,5 +39,15 @@ module CongregaPlenum
         'dataFim' => '2026-01-31'
       }.merge(overrides)
     end
+
+    def voting_payload(overrides = {})
+      {
+        'id' => '12345-2026',
+        'data' => '2026-08-20',
+        'descricao' => 'Aprovado o parecer.',
+        'aprovacao' => 1,
+        'siglaOrgao' => 'PLEN'
+      }.merge(overrides)
+    end
   end
 end
