@@ -73,9 +73,10 @@ GEM
       ast (~> 2.4.1)
       racc
     prism (1.6.0)
-    pry (0.15.2)
+    pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
+      reline (>= 0.6.0)
     psych (5.2.6)
       date
       stringio
@@ -183,7 +184,7 @@ DEPENDENCIES
   congrega_plenum!
   debug (~> 1.11)
   logger (~> 1.7)
-  pry (~> 0.15.2)
+  pry (~> 0.16.0)
   rake (~> 13.0)
   rdoc (~> 6.16)
   rspec (~> 3.0)
