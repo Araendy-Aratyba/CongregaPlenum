@@ -2,20 +2,20 @@
   <title id="title">Diafania Claritas</title>
   <desc id="description">Imagem social com o Congresso Nacional observado por um olho.</desc>
   <rect width="1280" height="640" rx="28" fill="#071e52"/>
-  <g transform="translate(62 72) scale(.6)" fill="none" stroke="#f7f4ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="12">
-    <path d="M245 604 C430 600 604 596 720 596 C930 596 1160 601 1425 606"/>
-    <path d="M414 594 C456 494 616 478 718 590"/>
-    <path d="M720 592 L720 232 L790 218 L790 596"/>
-    <path d="M828 596 L828 232 L910 250 L910 596"/>
-    <path d="M940 515 C1068 520 1224 519 1356 510"/>
-    <path d="M940 515 C1042 633 1244 644 1356 510"/>
-    <path d="M1138 292 Q1201 210 1298 260"/>
-    <path d="M1138 292 Q1210 351 1298 260"/>
-    <path d="M1172 279 A48 48 0 0 1 1247 270"/>
-    <path d="M1172 279 A48 48 0 0 0 1247 270"/>
-    <circle cx="1192" cy="294" r="18" fill="#f7f4ed" stroke="none"/>
-    <path d="M1149 246 L1134 222 M1175 225 L1166 196 M1205 216 L1202 184 M1236 219 L1243 188 M1265 231 L1280 203 M1288 248 L1310 228"/>
-    <path d="M1144 315 L1129 338 M1170 333 L1161 360 M1200 340 L1199 370 M1231 336 L1238 365 M1260 324 L1276 350 M1283 306 L1306 325"/>
+  <g transform="translate(333 -64) scale(.6)" fill="none" stroke="#f7f4ed" stroke-linecap="round" stroke-linejoin="round" stroke-width="14">
+    <path d="M116 705 C310 700 528 700 836 706"/>
+    <path d="M174 696 C205 610 330 602 382 692"/>
+    <path d="M382 695 L382 358 L440 346 L440 700"/>
+    <path d="M470 700 L470 360 L536 375 L536 700"/>
+    <path d="M560 646 C631 650 706 649 774 644"/>
+    <path d="M560 646 C612 717 718 721 774 644"/>
+    <path d="M665 508 Q719 435 800 478"/>
+    <path d="M665 508 Q725 558 800 478"/>
+    <path d="M694 496 A40 40 0 0 1 758 488"/>
+    <path d="M694 496 A40 40 0 0 0 758 488"/>
+    <circle cx="709" cy="510" r="16" fill="#f7f4ed" stroke="none"/>
+    <path d="M674 469 L661 448 M696 451 L689 427 M722 444 L721 417 M748 447 L755 421 M772 457 L785 434 M793 472 L813 455"/>
+    <path d="M670 527 L657 548 M693 542 L686 566 M719 548 L719 575 M745 544 L752 568 M770 534 L784 556 M790 519 L810 535"/>
   </g>
   <text x="640" y="552" fill="#f7f4ed" font-family="ui-sans-serif, system-ui, sans-serif" font-size="44" font-weight="600" letter-spacing="8" text-anchor="middle">DIAFANIA CLARITAS</text>
 </svg>
