@@ -13,7 +13,7 @@ gem 'rubocop', '~> 1.89'
 gem 'yard', '~> 0.9.45'
 
 group :test do
-  gem 'simplecov', '~> 0.22', require: false
+  gem 'simplecov', '~> 1.1', require: false
   gem 'vcr', '~> 6.4'
   gem 'webmock', '~> 3.23'
 end
