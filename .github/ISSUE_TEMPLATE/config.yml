@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentação
-    url: https://zarbielli.github.io/CongregaPlenum/
+    url: https://diafania-claritas.github.io/CongregaPlenum/
     about: Consulte os contratos e métodos públicos antes de abrir uma issue.
   - name: Vulnerabilidade de segurança
-    url: https://github.com/zarbielli/CongregaPlenum/security/advisories/new
+    url: https://github.com/Diafania-Claritas/CongregaPlenum/security/advisories/new
     about: Relate vulnerabilidades de forma privada; não use uma issue pública.

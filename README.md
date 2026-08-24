@@ -1,8 +1,8 @@
 # CongregaPlenum
 
-[![CI](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml/badge.svg)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fzarbielli.github.io%2FCongregaPlenum%2Fcoverage.json)](https://github.com/zarbielli/CongregaPlenum/actions/workflows/ci.yml)
-[![Documentation](https://github.com/zarbielli/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://zarbielli.github.io/CongregaPlenum/)
+[![CI](https://github.com/Diafania-Claritas/CongregaPlenum/actions/workflows/ci.yml/badge.svg)](https://github.com/Diafania-Claritas/CongregaPlenum/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fdiafania-claritas.github.io%2FCongregaPlenum%2Fcoverage.json)](https://github.com/Diafania-Claritas/CongregaPlenum/actions/workflows/ci.yml)
+[![Documentation](https://github.com/Diafania-Claritas/CongregaPlenum/actions/workflows/docs.yml/badge.svg)](https://diafania-claritas.github.io/CongregaPlenum/)
 [![Gem Version](https://img.shields.io/gem/v/congrega_plenum.svg)](https://rubygems.org/gems/congrega_plenum)
 [![License: AGPL-3.0-or-later](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg)](LICENSE)
 
@@ -11,7 +11,7 @@ com paginação, retries, logging e serviços para deputados, partidos e
 legislaturas e votações. O projeto inclui assinaturas RBS e uma API orientada a
 sincronizações e aplicações de dados cívicos.
 
-- [Documentação da API](https://zarbielli.github.io/CongregaPlenum/)
+- [Documentação da API](https://diafania-claritas.github.io/CongregaPlenum/)
 - [Como contribuir](CONTRIBUTING.md)
 - [Changelog](CHANGELOG.md)
 - [Política de segurança](SECURITY.md)
@@ -110,7 +110,7 @@ ao mesmo ano. Votações simbólicas normalmente não possuem votos individuais,
 uma lista de votos vazia não identifica quais deputados estavam ausentes.
 
 Para controle de baixo nível, use `CongregaPlenum::Client`. Consulte a
-[documentação YARD](https://zarbielli.github.io/CongregaPlenum/) para os contratos
+[documentação YARD](https://diafania-claritas.github.io/CongregaPlenum/) para os contratos
 completos.
 
 ## Desenvolvimento

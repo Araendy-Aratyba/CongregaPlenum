@@ -9,7 +9,7 @@ nunca uma issue pública.
 
 ## Antes de começar
 
-- Pesquise as [issues existentes](https://github.com/zarbielli/CongregaPlenum/issues).
+- Pesquise as [issues existentes](https://github.com/Diafania-Claritas/CongregaPlenum/issues).
 - Para mudanças grandes, abra primeiro uma issue descrevendo o problema e a
   solução proposta.
 - Mantenha cada pull request focado em uma única mudança.

@@ -13,7 +13,7 @@ credenciais.
 
 Use o botão **Report a vulnerability** na aba **Security** do repositório ou
 acesse o [formulário privado de
-reporte](https://github.com/zarbielli/CongregaPlenum/security/advisories/new).
+reporte](https://github.com/Diafania-Claritas/CongregaPlenum/security/advisories/new).
 
 Inclua, quando possível:
 

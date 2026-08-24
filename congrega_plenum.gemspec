@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = 'Ruby client for Câmara dos Deputados open data API'
   spec.description = 'HTTP client with pagination, retries and logging for Câmara dos Deputados open data endpoints.'
-  spec.homepage = 'https://github.com/zarbielli/CongregaPlenum'
+  spec.homepage = 'https://github.com/Diafania-Claritas/CongregaPlenum'
   spec.required_ruby_version = '>= 3.4.0'
   spec.license = 'AGPL-3.0-or-later'
 
