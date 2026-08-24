@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title description">
+  <title id="title">Diafania Claritas</title>
+  <desc id="description">Avatar com o Congresso Nacional observado por um olho no alto à direita.</desc>
+  <g fill="none" stroke="#071e52" stroke-linecap="round" stroke-linejoin="round" stroke-width="10">
+    <path d="M116 705 C310 700 528 700 836 706"/>
+    <path d="M174 696 C205 610 330 602 382 692"/>
+    <path d="M382 695 L382 358 L440 346 L440 700"/>
+    <path d="M470 700 L470 360 L536 375 L536 700"/>
+    <path d="M560 646 C631 650 706 649 774 644"/>
+    <path d="M560 646 C612 717 718 721 774 644"/>
+  </g>
+  <g fill="none" stroke="#071e52" stroke-linecap="round" stroke-linejoin="round" stroke-width="9">
+    <path d="M665 508 Q719 435 800 478"/>
+    <path d="M665 508 Q725 558 800 478"/>
+    <path d="M694 496 A40 40 0 0 1 758 488"/>
+    <path d="M694 496 A40 40 0 0 0 758 488"/>
+    <circle cx="709" cy="510" r="16" fill="#071e52" stroke="none"/>
+    <path d="M674 469 L661 448 M696 451 L689 427 M722 444 L721 417 M748 447 L755 421 M772 457 L785 434 M793 472 L813 455"/>
+    <path d="M670 527 L657 548 M693 542 L686 566 M719 548 L719 575 M745 544 L752 568 M770 534 L784 556 M790 519 L810 535"/>
+  </g>
+</svg>

@@ -27,6 +27,8 @@ RSpec.describe 'Community health files' do
     security = File.read(File.join(root, 'SECURITY.md'))
 
     expect(readme).to include('https://diafania-claritas.github.io/CongregaPlenum/', 'CONTRIBUTING.md')
+    expect(readme).to include('assets/branding/diafania-claritas-logo.svg',
+                              'assets/branding/diafania-claritas-logo-inverse.svg')
     expect(security).to include('https://github.com/Diafania-Claritas/CongregaPlenum/security/advisories/new')
   end
 end
