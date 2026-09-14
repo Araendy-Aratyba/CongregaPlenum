@@ -93,7 +93,7 @@ jobs:
           echo "gem_path=$gem_file" >> "$GITHUB_OUTPUT"
 
       - name: Configure RubyGems credentials
-        uses: rubygems/configure-rubygems-credentials@abfabee9aa68f1c2c95a6f58c91d826e5fac33da
+        uses: rubygems/configure-rubygems-credentials@daab0479595bcc124493903b3df17273d86e073f
 
       - name: Push to RubyGems
         env:
