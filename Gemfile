@@ -21,7 +21,7 @@ end
 group :development do
   gem 'debug', '~> 1.11'
   gem 'pry', '~> 0.16.0'
-  gem 'steep', '~> 1.10'
+  gem 'steep', '~> 2.0'
 end
 
 gem 'rdoc', '~> 6.16'
