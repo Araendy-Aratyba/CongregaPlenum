@@ -33,7 +33,7 @@ sincronizações e aplicações de dados cívicos.
 Adicione a gem ao seu `Gemfile`:
 
 ```ruby
-gem 'congrega_plenum', '~> 0.2.0'
+gem 'congrega_plenum', '~> 0.3.0'
 ```
 
 Depois execute:
@@ -45,7 +45,7 @@ bundle install
 Ou instale diretamente pelo RubyGems:
 
 ```bash
-gem install congrega_plenum -v '~> 0.2.0'
+gem install congrega_plenum -v '~> 0.3.0'
 ```
 
 Consulte a [página da gem no RubyGems](https://rubygems.org/gems/congrega_plenum)
@@ -92,6 +92,11 @@ Outros fluxos disponíveis:
 - `CongregaPlenum::VotingsService.fetch_by_id(voting_id)`
 - `CongregaPlenum::VotingsService.fetch_votes(voting_id)`
 - `CongregaPlenum::VotingsService.fetch_orientations(voting_id)`
+
+Para uma sincronização retomável de catálogos, use `fetch_page` em
+`CongressmenService`, `PartiesService` ou `LegislaturesService`. O resultado
+fornece `records` e `next_page`. `next_page` é `nil` no fim da lista. Respostas
+sem uma lista explícita ou com continuação inválida levantam `APIError`.
 
 Uma votação representa uma decisão legislativa individual já concluída. Uma
 proposição pode ser afetada por várias votações de pareceres, emendas,

@@ -6,6 +6,14 @@ versionamento seguirá [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## Unreleased
 
+## [0.3.0] - 2026-11-22
+
+### Added
+
+- `fetch_page` para os catálogos de legislaturas, partidos e deputados.
+  O resultado preserva as linhas publicadas e a continuação da página.
+  Um envelope inválido gera `CongregaPlenum::APIError`.
+
 ## [0.2.0] - 2026-08-23
 
 ### Changed

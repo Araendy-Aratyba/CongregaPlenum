@@ -76,6 +76,7 @@ end
 require_relative 'adapters/http_adapter'
 require_relative 'adapters/retry_policy'
 require_relative 'adapters/response_handler'
+require_relative 'catalog_page'
 require_relative 'client'
 require_relative 'modules/congressmen_service'
 require_relative 'modules/parties_service'

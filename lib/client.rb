@@ -44,6 +44,13 @@ module CongregaPlenum
       results
     end
 
+    # Retrieves and validates one page without discarding continuation metadata.
+    def get_catalog_page(endpoint, page:, params: {})
+      raise ArgumentError, 'page must be a positive integer' unless page.is_a?(Integer) && page.positive?
+
+      CatalogPage.parse(get(endpoint, params.merge(pagina: page)), page: page)
+    end
+
     private
 
     def each_response_page(endpoint, params)
