@@ -76,6 +76,12 @@ module CongregaPlenum
         response['dados'] || []
       end
 
+      # Returns one validated catalogue page with its next page, if published.
+      def fetch_page(page: 1, items_per_page: ITEMS_PER_PAGE)
+        params = { itens: items_per_page, ordem: 'ASC', ordenarPor: 'id' }.compact
+        client.get_catalog_page('partidos', page: page, params: params)
+      end
+
       private
 
       def extract_detail(response, resource)

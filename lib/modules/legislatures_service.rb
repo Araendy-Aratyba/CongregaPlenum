@@ -86,6 +86,12 @@ module CongregaPlenum
         deputies
       end
 
+      # Returns one validated catalogue page with its next page, if published.
+      def fetch_page(page: 1, items_per_page: PAGE_SIZE)
+        params = { itens: items_per_page }.compact
+        client.get_catalog_page('legislaturas', page: page, params: params)
+      end
+
       private
 
       def extract_detail(response, resource)

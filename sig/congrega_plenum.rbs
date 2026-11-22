@@ -67,6 +67,13 @@ module CongregaPlenum
     def parse_json_response: (::Net::HTTPResponse, String) -> payload_hash
   end
 
+  class CatalogPage
+    attr_reader records: payload_list
+    attr_reader next_page: Integer?
+    def self.new: (records: payload_list, next_page: Integer?) -> instance
+    def self.parse: (payload_hash, page: Integer) -> instance
+  end
+
   class Client
     include ::Singleton
 
@@ -77,6 +84,7 @@ module CongregaPlenum
 
     def initialize: () -> void
     def get: (String, ?params_hash) -> payload_hash
+    def get_catalog_page: (String, page: Integer, ?params: params_hash) -> CatalogPage
     def get_paginated: (String, ?params_hash) -> payload_list
     def each_response_page: (String, params_hash) { (payload_list) -> void } -> void
     def request_page: (String, params_hash, Integer) -> payload_hash
@@ -97,6 +105,7 @@ module CongregaPlenum
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
     def self.fetch_all_by_legislature: (Integer) -> payload_list
+    def self.fetch_page: (?page: Integer, ?items_per_page: Integer, ?legislature_id: Integer?) -> CatalogPage
     def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_list: (?page: Integer, ?items_per_page: Integer, ?legislature_id: Integer?) -> payload_list
     def self.fetch_deputies_collection: (context: String, params: params_hash) -> payload_list
@@ -118,6 +127,7 @@ module CongregaPlenum
     def self.api_get: (String, ?params_hash) -> payload_hash
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
+    def self.fetch_page: (?page: Integer, ?items_per_page: Integer) -> CatalogPage
     def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_list: (?page: Integer, ?items_per_page: Integer) -> payload_list
     def self.extract_detail: (payload_hash, String) -> detail_payload
@@ -138,6 +148,7 @@ module CongregaPlenum
     def self.api_get: (String, ?params_hash) -> payload_hash
     def self.api_get_paginated: (String, ?params_hash) -> payload_list
     def self.fetch_all: () -> payload_list
+    def self.fetch_page: (?page: Integer, ?items_per_page: Integer) -> CatalogPage
     def self.fetch_by_id: (Integer) -> detail_payload
     def self.fetch_mesa: (Integer) -> payload_list
     def self.fetch_deputies: (Integer) -> payload_list
